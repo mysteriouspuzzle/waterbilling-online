@@ -2,7 +2,7 @@
 <?php $this->load->view('layout/header'); ?>
 <body>
 
-    <?php $this->load->view('layout/reader-consumers'); ?>
+    <?php $this->load->view('layout/admin-rates'); ?>
 
     <!-- Right Panel -->
 
@@ -15,7 +15,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>View Consumers</h1>
+                        <h1>Add Rate</h1>
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                           <li><a href="administrator/">Dashboard</a></li>
-                          <li class="active">View Consumers</li>
+                          <li class="active">Add Rate</li>
                         </ol>
                     </div>
                 </div>
@@ -37,37 +37,49 @@
                <span class="ti ti-check"></span> <?php echo $this->session->flashdata('success'); ?>
            </div>
           <?php } ?>
+          <?php if($this->session->flashdata('error')){ ?>
+            <div class="alert alert-danger">
+               <a href="#" class="close" data-dismiss="alert">&times;</a>
+               <span class="ti ti-info"></span> <?php echo $this->session->flashdata('error'); ?>
+           </div>
+          <?php } ?>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-8">
+          <form action="administrator/storerate" method="post">
             <div class="card">
+              <div class="card-header">
+                <strong>New Rate</strong> Form
+              </div>
               <div class="card-body card-block">
-                <table class="table table-bordered" id="bootstrap-data-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Birthdate</th>
-                      <th>Address</th>
-                      <th>Contact Number</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php foreach($consumers as $consumer) { ?>
-                    <tr>
-                      <td><?php echo $consumer->firstname. ' ' .$consumer->lastname ?></td>
-                      <td><?php echo $consumer->birthdate ?></td>
-                      <td><?php echo $consumer->address ?></td>
-                      <td><?php echo $consumer->contactNumber ?></td>
-                      <td><a href="reader/consumerhistory?id=<?php echo $consumer->id ?>" class="btn btn-primary">History</a>
-                      <a href="reader/readmeter/<?php echo $consumer->id ?>" class="btn btn-success">Read Meter</a>
-                      <!-- <a href="teller/consumercargo?id=<?php echo $consumer->id ?>" class="btn btn-success">Cargo</a> -->
-                    </td>
-                    </tr>
-                  <?php } ?>
-                  </tbody>
-                </table>
+                <div class="row form-group">
+                  <div class="col col-md-3"><label for="description" class="form-control-label">Description</label></div>
+                  <div class="col-12 col-md-9"><input type="text" id="description" name="description" placeholder="Description" class="form-control" required></div>
+                </div>
+                <div class="row form-group">
+                  <div class="col col-md-3"><label for="minimum" class="form-control-label">Minimum</label></div>
+                  <div class="col-12 col-md-9"><input type="number" id="minimum" name="minimum" placeholder="Minimum" class="form-control" required></div>
+                </div>
+                <div class="row form-group">
+                  <div class="col col-md-3"><label for="maximum" class="form-control-label">Maximum</label></div>
+                  <div class="col-12 col-md-9"><input type="number" id="maximum" name="maximum" placeholder="Maximum" class="form-control" required></div>
+                </div>
+                <div class="row form-group">
+                  <div class="col col-md-3"><label for="rate" class="form-control-label">Rate</label></div>
+                  <div class="col-12 col-md-9"><input type="number" id="rate" name="rate" placeholder="Rate" class="form-control" required></div>
+                  <!-- <div class="help-block">Minimum of 6 characters</div> -->
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-dot-circle-o"></i> Submit
+                </button>
+                <input type="submit" name="submit" id="submit" style="display:none">
+                <button type="reset" class="btn btn-danger btn-sm">
+                  <i class="fa fa-ban"></i> Reset
+                </button>
               </div>
             </div>
+          </form>
         </div>
 
       </div> <!-- .content -->
@@ -93,15 +105,12 @@
           </div>
       </div>
   </div>
-<script type="text/javascript" src="assets/js/vendor/jquery-ui.min.js"></script>
+
 <script type="text/javascript" src="assets/js/validator.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
     $('#modal1').click(function(){
       $('#submit').click();
-    });
-    $( ".datepicker" ).datepicker({
-      dateFormat: 'yy-mm-dd'
     });
   })
 </script>

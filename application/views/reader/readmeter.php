@@ -39,15 +39,16 @@
            </div>
           <?php } ?>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-sm-12">
             <div class="card">
                 <div class="card-body card-block">
-                    <div>
-                        <label for="">Previous Reading</label>
-                        <div style="word-spacing: 15px" class="">
-                            <?php 
+                    <form action="reader/readmeter/<?php echo $id ?>" method="post">
+                        <div>
+                            <label for="">Previous Reading</label>
+                            <div style="word-spacing: 15px" class="">
+                                <?php 
                             if($prev_meter == 0) { ?>
-                                <input type="text" value="000000000" style="text-align:right" class="form-control" readonly> <?php
+                                <input type="text" value="0000" style="text-align:right" class="form-control" readonly> <?php
                             }else{ ?>
                                 <input type="text" value="<?php echo $prev_meter ?>" style="text-align:right" class="form-control" readonly> <?php
                             } ?>
@@ -56,9 +57,58 @@
                     <div>
                         <label for="">Current Reading</label>
                         <div style="word-spacing: 15px" class="">
-                            <input type="text" style="text-align:right" class="form-control">
+                            <input type="text" style="text-align:right" maxlength="4" class="form-control" name="current_meter" required autofocus>
                         </div>
-                  </div>
+                    </div><br/>
+                    <div>
+                        <button type="submit" class="btn btn-block btn-primary">Calculate</button>
+                    </div>
+                </form>
+                    
+              </div>
+            </div>
+        </div>
+
+        <div class="col-lg-9 col-sm-12">
+            <div class="card">
+                <div class="card-body card-block">
+                    <div>
+                        <label for="">Consumer</label>
+                        <div style="padding: 2px 10px" class="text-white bg-info">
+                            <?php echo $consumer->lastname . ', ' . $consumer->firstname . ' ' . ($consumer->middlename =='' ? '':$consumer->middlename[0] . '.') ?>
+                        </div>
+                    </div><br>
+                    <div>
+                        <label for="">Previous Reading</label>
+                        <div style="padding: 2px 10px" class="text-white bg-info">
+                            <?php echo $prev_meter ?>
+                        </div>
+                    </div><br>
+                    <div>
+                        <label for="">Current Reading</label>
+                        <div style="padding: 2px 10px" class="text-white bg-info">
+                            <?php 
+                            if($current_meter == ''){
+                                ?> No current reading yet. <?php
+                            }else{
+                                echo $current_meter;
+                            } ?>
+                        </div>
+                    </div><br/>
+                    <div>
+                        <label for="">Bill</label>
+                        <div style="padding: 2px 10px" class="text-white bg-info">
+                            <?php 
+                            if($current_meter == ''){
+                                ?> No current reading yet. <?php
+                            }else{
+                                echo '₱'.sprintf('%.2f', $bill);
+                            } ?>
+                        </div>
+                    </div><br/>
+                    <div>
+                        <a class="btn btn-block btn-primary" href="reader/sendreceipt">Send Email & SMS</a>
+                    </div>
               </div>
             </div>
         </div>

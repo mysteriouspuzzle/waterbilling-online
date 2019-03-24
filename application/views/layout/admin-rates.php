@@ -10,14 +10,14 @@
             <li class="">
                 <a href="administrator/"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
             </li>
-            <li class="menu-item-has-children dropdown active">
+            <li class="menu-item-has-children dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Accounts</a>
                 <ul class="sub-menu children dropdown-menu">
                     <li><a href="administrator/addaccount">Add Account</a></li>
                     <li><a href="administrator/accounts">View Accounts</a></li>
                 </ul>
             </li>
-            <li class="menu-item-has-children dropdown">
+            <li class="menu-item-has-children dropdown active">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tint"></i>Rates</a>
                 <ul class="sub-menu children dropdown-menu">
                     <li><a href="administrator/addrate">New Rate</a></li>

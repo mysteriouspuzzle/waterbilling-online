@@ -11,4 +11,8 @@ class Consumers extends CI_Model {
 		$this->db->insert('consumers', $data);
 		return null;
 	}
+
+	public function getConsumerDetails($id){
+		return $this->db->get_where('consumers', array('id'=>$id))->row();
+	}
 }
