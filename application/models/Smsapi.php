@@ -6,9 +6,9 @@ class Smsapi extends CI_Model {
 	public function getEndpoint(){
 		return $this->db->get('sms_api')->row();
 	}
-	public function testSms($endpoint, $mobile){	
+	public function sendSms($endpoint, $mobile, $msg){	
 		if( $this->url_test($endpoint)) {
-			$msg = rawurlencode("This is a test message.");
+			$msg = rawurlencode($msg);
 			file_get_contents($endpoint.'v1/sms/send/?phone='.$mobile.'&message='.$msg);
 			return true;
 		}else {

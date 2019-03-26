@@ -105,7 +105,7 @@
     <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
-            <form action="administrator/testsms" method="post">
+            <form action="administrator/sendsms" method="post">
               <div class="modal-header">
                   <h5 class="modal-title" id="mediumModalLabel">Contact Number</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">

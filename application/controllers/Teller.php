@@ -28,13 +28,15 @@ class Teller extends CI_Controller {
 		$birthdate = $this->input->post('birthdate');
 		$address = $this->input->post('address');
 		$contact = $this->input->post('contact');
+		$email = $this->input->post('email');
 		$data = array(
 			'firstname'=>ucwords($firstname),
 			'middlename'=>ucwords($middlename),
 			'lastname'=>ucwords($lastname),
 			'birthdate'=>date('Y-m-d', strtotime($birthdate)),
 			'address'=>ucwords($address),
-			'contactNumber'=>$contact
+			'contactNumber'=>$contact,
+			'email'=>$email
 		);
 		$this->consumers->storeConsumer($data);
 		$this->session->set_flashdata('success','Consumer succcessfully saved.');

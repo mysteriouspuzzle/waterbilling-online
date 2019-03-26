@@ -133,11 +133,11 @@ class Administrator extends CI_Controller {
 		$data['endpoint'] = $this->smsapi->getEndpoint();
 		$this->load->view('administrator/smsapi', $data);
 	}
-	public function testsms(){
+	public function sendsms(){
 		$mobile = $this->input->post('mobile');
 		$api = $this->smsapi->getEndpoint();
-		$check = $this->smsapi->testSms($api->endpoint, $mobile);
-		echo $check;
+		$msg = "This is a text message.";
+		$check = $this->smsapi->sendSms($api->endpoint, $mobile, $msg);
 		if($check == true){
 			$this->session->set_flashdata('success','SMS succcessfully sent!');
 		}else{

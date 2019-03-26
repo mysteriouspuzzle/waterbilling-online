@@ -42,7 +42,7 @@
         <div class="col-lg-3 col-sm-12">
             <div class="card">
                 <div class="card-body card-block">
-                    <form action="reader/readmeter/<?php echo $id ?>" method="post">
+                    <form action="reader/readmeter/<?php echo $id ?>" method="post" autocomplete="off">
                         <div>
                             <label for="">Previous Reading</label>
                             <div style="word-spacing: 15px" class="">
@@ -70,47 +70,70 @@
         </div>
 
         <div class="col-lg-9 col-sm-12">
-            <div class="card">
-                <div class="card-body card-block">
-                    <div>
-                        <label for="">Consumer</label>
-                        <div style="padding: 2px 10px" class="text-white bg-info">
-                            <?php echo $consumer->lastname . ', ' . $consumer->firstname . ' ' . ($consumer->middlename =='' ? '':$consumer->middlename[0] . '.') ?>
-                        </div>
-                    </div><br>
-                    <div>
-                        <label for="">Previous Reading</label>
-                        <div style="padding: 2px 10px" class="text-white bg-info">
-                            <?php echo $prev_meter ?>
-                        </div>
-                    </div><br>
-                    <div>
-                        <label for="">Current Reading</label>
-                        <div style="padding: 2px 10px" class="text-white bg-info">
+            <form action="reader/sendbill/<?php echo $id ?>" method="post">
+                <div class="card">
+                    <div class="card-body card-block">
+                        <div>
+                            <label for="">Consumer</label>
+                            <div style="padding: 2px 10px" class="text-white bg-info">
+                                <?php echo $consumer->lastname . ', ' . $consumer->firstname . ' ' . ($consumer->middlename =='' ? '':$consumer->middlename[0] . '.') ?>
+                            </div>
+                        </div><br>
+                        <div>
+                            <label for="">Previous Reading</label>
+                            <div style="padding: 2px 10px" class="text-white bg-info">
+                                <?php echo $prev_meter ?>
+                                <input type="hidden" name="prev_meter" value="<?php echo $prev_meter ?>">
+                            </div>
+                        </div><br>
+                        <div>
+                            <label for="">Present Reading</label>
+                            <div style="padding: 2px 10px" class="text-white bg-info">
+                                <?php 
+                                if($current_meter == ''){
+                                    ?> No current reading yet. <?php
+                                }else{
+                                    echo sprintf("%04d", $current_meter); ?>
+                                    <input type="hidden" name="current_meter" value="<?php echo $current_meter ?>"> <?php
+                                } ?>
+                            </div>
+                        </div><br/>
+                        <div>
+                            <label for="">Consupmtion</label>
+                            <div style="padding: 2px 10px" class="text-white bg-info">
+                                <?php 
+                                if($current_meter == ''){
+                                    ?> No current reading yet. <?php
+                                }else{
+                                    echo $current_meter-$prev_meter ; ?>
+                                    <input type="hidden" name="consumption" value="<?php echo $current_meter-$prev_meter ?>"> <?php
+                                } ?>
+                            </div>
+                        </div><br/>
+                        <div>
+                            <label for="">Total Amount Due</label>
+                            <div style="padding: 2px 10px" class="text-white bg-info">
+                                <?php 
+                                if($current_meter == ''){
+                                    ?> No current reading yet. <?php
+                                }else{
+                                    echo '₱'.sprintf('%.2f', $bill); ?>
+                                    <input type="hidden" name="bill" value="<?php echo $bill ?>"> <?php
+                                } ?>
+                            </div>
+                        </div><br/>
+                        <div>
                             <?php 
-                            if($current_meter == ''){
-                                ?> No current reading yet. <?php
-                            }else{
-                                echo $current_meter;
+                            if($current_meter == ''){ ?>
+                                <a class="btn btn-block btn-primary disabled">Send Email & SMS</a> <?php
+                            }else{ ?>
+                                <button type="submit" class="btn btn-block btn-primary">Send Email & SMS</button> <?php
                             } ?>
+                            
                         </div>
-                    </div><br/>
-                    <div>
-                        <label for="">Bill</label>
-                        <div style="padding: 2px 10px" class="text-white bg-info">
-                            <?php 
-                            if($current_meter == ''){
-                                ?> No current reading yet. <?php
-                            }else{
-                                echo '₱'.sprintf('%.2f', $bill);
-                            } ?>
-                        </div>
-                    </div><br/>
-                    <div>
-                        <a class="btn btn-block btn-primary" href="reader/sendreceipt">Send Email & SMS</a>
                     </div>
-              </div>
-            </div>
+                </div>
+            </form>
         </div>
 
       </div> <!-- .content -->

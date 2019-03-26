@@ -69,6 +69,10 @@
                   <div class="col col-md-4"><label for="contact" class=" form-control-label">Contact Number</label></div>
                   <div class="col-12 col-md-8"><input type="text" id="contact" name="contact" placeholder="Contact Number" class="form-control" required></div>
                 </div>
+                <div class="row form-group">
+                  <div class="col col-md-4"><label for="email" class=" form-control-label">Email Address</label></div>
+                  <div class="col-12 col-md-8"><input type="email" id="email" name="email" placeholder="Email Address" class="form-control" required></div>
+                </div>
               </div>
               <div class="card-footer">
                 <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
