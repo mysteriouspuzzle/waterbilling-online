@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2019 at 03:29 AM
+-- Generation Time: Mar 27, 2019 at 12:40 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -58,6 +58,7 @@ CREATE TABLE `consumers` (
   `birthdate` date NOT NULL,
   `address` varchar(255) NOT NULL,
   `contactNumber` text NOT NULL,
+  `email` varchar(30) NOT NULL,
   `online` tinyint(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -65,9 +66,9 @@ CREATE TABLE `consumers` (
 -- Dumping data for table `consumers`
 --
 
-INSERT INTO `consumers` (`id`, `firstname`, `middlename`, `lastname`, `birthdate`, `address`, `contactNumber`, `online`) VALUES
-(1, 'Makisig', '', 'Gerero', '2009-03-04', 'Lacion City', '093423123', 0),
-(2, 'Jake Joseph', 'Malinao', 'Lingatong', '2018-10-22', 'Bogo', '09328478343', 0);
+INSERT INTO `consumers` (`id`, `firstname`, `middlename`, `lastname`, `birthdate`, `address`, `contactNumber`, `email`, `online`) VALUES
+(1, 'Makisig', '', 'Gerero', '2009-03-04', 'Lacion City', '09342324255', 'mysterious.puzzle15@gmail.com', 0),
+(2, 'Jake Joseph', 'Malinao', 'Lingatong', '2018-10-22', 'Bogo', '09328478343', 'mysterious.puzzle15@gmail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -129,9 +130,18 @@ CREATE TABLE `reading` (
   `previous_read` varchar(10) NOT NULL,
   `next_read` varchar(10) NOT NULL,
   `rate` int(10) NOT NULL,
+  `date` date NOT NULL,
   `payment` float NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `reading`
+--
+
+INSERT INTO `reading` (`id`, `consumer_id`, `previous_read`, `next_read`, `rate`, `date`, `payment`, `status`) VALUES
+(1, 2, '', '0000', 0, '2019-03-01', 0, 0),
+(2, 1, '', '0000', 0, '2019-03-01', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -149,7 +159,7 @@ CREATE TABLE `sms_api` (
 --
 
 INSERT INTO `sms_api` (`id`, `endpoint`) VALUES
-(1, 'http://192.168.254.100:8080/');
+(1, 'http://192.168.1.6:8080/');
 
 -- --------------------------------------------------------
 
@@ -247,7 +257,7 @@ ALTER TABLE `rates`
 -- AUTO_INCREMENT for table `reading`
 --
 ALTER TABLE `reading`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `sms_api`
 --
