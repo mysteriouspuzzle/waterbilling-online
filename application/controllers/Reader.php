@@ -69,12 +69,23 @@ class Reader extends CI_Controller {
 			'bill'=>$this->input->post('bill'),
 			'consumption'=>$this->input->post('consumption')
 		);
-		$this->sendEmail($consumer, $details, $bill);
+		$data = array(
+			'consumer_id'=>$id,
+			'previous_date'=>date('Y-m-d'),
+			'present_date'=>date('Y-m-d'),
+			'previous_meter'=>$this->input->post('prev_meter'),
+			'present_meter'=>$this->input->post('current_meter'),
+			'bill'=>$this->input->post('bill'),
+			'consumption'=>$this->input->post('consumption'),
+			'status'=>'Unpaid'
+		);
+		$tId = $this->reading->saveTransaction($data);
+		$this->sendEmail($consumer, $details, $bill, $tId);
 		$this->sendSms($consumer, $details, $bill);
 		$this->session->set_flashdata('success','SMS and email successfully sent to consumer.');
 		redirect('reader/readmeter/'.$id);
 	}
-	function sendEmail($consumer, $details, $bill){
+	function sendEmail($consumer, $details, $bill, $tId){
 		$this->load->view('PHPMailerAutoload');
 		$mail = new PHPMailer;
 
@@ -97,7 +108,10 @@ class Reader extends CI_Controller {
 		$mail->Subject = 'Water Billing System Receipt';
 		$data['prev_date'] = $details->date;
 		$data['curr_date'] = $bill['current_date'];
+		$data['current_meter'] = $bill['current_meter'];
+		$data['prev_meter'] = $bill['prev_meter'];
 		$data['bill'] = $bill['bill'];
+		$data['tid'] = $tId;
 		$msg = $this->load->view('reader/email',$data,true);
 		$mail->Body    = $msg;
 		$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
@@ -111,7 +125,7 @@ class Reader extends CI_Controller {
 	}
 	function sendSms($consumer, $details, $bill){
 		$api = $this->smsapi->getEndpoint();
-		$msg = "Your bill for $details->date to " .$bill['current_date']. " is " .$bill['bill']. ".";
+		$msg = "Your bill for $details->date to " .$bill['current_date']. " is " .$bill['bill']. ". For more info check your email.";
 		$check = $this->smsapi->sendSms($api->endpoint, $consumer->contactNumber, $msg);
 		if($check == true){
 			$this->session->set_flashdata('success','SMS and Email succcessfully sent!');

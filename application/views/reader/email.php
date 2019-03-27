@@ -355,7 +355,7 @@ Sizes: [
 																		<table border="0" cellpadding="0" cellspacing="0" width="210" style="max-width: 100%;">
 																			<tr>
 																				<td align="left" class="textContent">
-                                                                                    <div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">Period To: <?php echo $curr_date ?></div>
+                                          <div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">Period To: <?php echo $curr_date ?></div>
 																					<div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">Period From: <?php echo $prev_date ?></div>
 																				</td>
 																			</tr>
@@ -365,8 +365,8 @@ Sizes: [
 																		<table class="flexibleContainerBoxNext" border="0" cellpadding="0" cellspacing="0" width="210" style="max-width: 100%;">
 																			<tr>
 																				<td align="left" class="textContent">
-                                                                                    <div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">Present Reading:</div>
-																					<div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">Previous Reading:</div>
+                                          <div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">Present Reading: <?php echo $current_meter ?></div>
+																					<div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">Previous Reading:<?php echo $prev_meter ?></div>
 																				</td>
 																			</tr>
 																		</table>
@@ -442,57 +442,10 @@ Sizes: [
 															<table border="0" cellpadding="0" cellspacing="0" width="50%">
 																<tr>
 																	<td align="center" valign="middle" style="padding-top:15px;padding-bottom:15px;padding-right:15px;padding-left:15px;">
-                                                                    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
-  <section id="contact" class="section-padding">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-
-          <div><img id="paypal-button-container" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Buy now with PayPal" /></div>
-          <script>
-              var bal =  '<?php echo '' ?>';
-              paypal.Button.render({
-
-                  env: 'sandbox', // sandbox | production
-
-                  // PayPal Client IDs - replace with your own
-                  // Create a PayPal app: https://developer.paypal.com/developer/applications/create
-                  client: {
-                      sandbox:    'AZAuyMwdMbtZPTRrf-AP5H9VK7XUBvHgp78LJoa0RWojFQpSR00QSBjq5ZsqpTJbPJRtfs7lg4XOMLjL',
-                      production: '<insert production client id>'
-                  },
-
-                  // Show the buyer a 'Pay Now' button in the checkout flow
-                  commit: true,
-
-                  // payment() is called when the button is clicked
-                  payment: function(data, actions) {
-
-                      // Make a call to the REST api to create the payment
-                      return actions.payment.create({
-                          payment: {
-                              transactions: [
-                                  {
-                                      amount: { total: bal, currency: 'PHP' }
-                                  }
-                              ]
-                          }
-                      });
-                  },
-
-                  // onAuthorize() is called when the buyer approves the payment
-                  onAuthorize: function(data, actions) {
-
-                      // Make a call to the REST api to execute the payment
-                      return actions.payment.execute().then(function() {
-                          window.alert('Payment Complete!');
-                          window.location = "http://localhost/waterbilling/reservation/proceed";
-                      });
-                  }
-
-              }, '#paypal-button-container');
-
-          </script>
+																		<?php $encbill = base64_encode($tid) ?>
+																		<a href="localhost/waterbilling/paypal?sandbox=AZAuyMwdMbtZPTRrf-AP5H9VK7XUBvHgp78LJoa0RWojFQpSR00QSBjq5ZsqpTJbPJRtfs7lg4XOMLjL&bill=<?php echo $encbill ?>">
+																			<img id="paypal-button-container" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Buy now with PayPal" />
+																		</a>
 																	</td>
 																</tr>
 															</table>
