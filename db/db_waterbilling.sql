@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2019 at 12:40 AM
+-- Generation Time: Mar 28, 2019 at 12:58 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -19,6 +19,34 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_waterbilling`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bills`
+--
+
+CREATE TABLE `bills` (
+  `bill_id` int(10) NOT NULL,
+  `consumer_id` int(10) NOT NULL,
+  `previous_date` date NOT NULL,
+  `present_date` date NOT NULL,
+  `previous_meter` varchar(10) NOT NULL,
+  `present_meter` varchar(10) NOT NULL,
+  `consumption` int(5) NOT NULL,
+  `bill` float(10,2) NOT NULL,
+  `status` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bills`
+--
+
+INSERT INTO `bills` (`bill_id`, `consumer_id`, `previous_date`, `present_date`, `previous_meter`, `present_meter`, `consumption`, `bill`, `status`) VALUES
+(1, 1, '2019-03-28', '2019-03-28', '0', '11', 11, 38.85, 'Unpaid'),
+(2, 1, '2019-03-28', '2019-03-28', '0000', '12', 12, 42.70, 'Unpaid'),
+(3, 1, '2019-03-28', '2019-03-28', '0000', '10', 10, 35.00, 'Unpaid'),
+(4, 1, '2019-03-28', '2019-03-28', '0000', '30', 30, 116.00, 'Unpaid');
 
 -- --------------------------------------------------------
 
@@ -188,6 +216,12 @@ INSERT INTO `user_levels` (`id`, `user_level`) VALUES
 --
 
 --
+-- Indexes for table `bills`
+--
+ALTER TABLE `bills`
+  ADD PRIMARY KEY (`bill_id`);
+
+--
 -- Indexes for table `codes`
 --
 ALTER TABLE `codes`
@@ -233,6 +267,11 @@ ALTER TABLE `user_levels`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `bills`
+--
+ALTER TABLE `bills`
+  MODIFY `bill_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `codes`
 --
