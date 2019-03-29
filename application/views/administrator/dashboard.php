@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        div class="content mt-3">
+        <div class="content mt-3">
 
 <div class="col-sm-12">
     <div class="alert  alert-success alert-dismissible fade show" role="alert">

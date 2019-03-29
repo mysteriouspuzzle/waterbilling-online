@@ -13,7 +13,7 @@
                 <div class="login-form">
                   <div align="center">
 
-                    <h4>Water Bill Statement</h4>
+                    <h4>Water Billing</h4>
                   </div>
                   <?php if($this->session->flashdata('error')){ ?>
                     <div class="alert alert-danger">
@@ -21,6 +21,10 @@
                        <strong>Sorry!</strong> <?php echo $this->session->flashdata('error'); ?>
                    </div>
                   <?php } ?>
+
+                  <div>
+                    The receipt was sent via email. Thank you!
+                  </div>
 
 
 
@@ -32,7 +36,6 @@
           <div id="paypal-button-container"></div>
           <script>
               var bal =  '<?php echo $bill->bill ?>';
-              var billId = '<?php echo $bill->bill_id ?>';
               paypal.Button.render({
 
                   env: 'sandbox', // sandbox | production
@@ -68,7 +71,7 @@
                       // Make a call to the REST api to execute the payment
                       return actions.payment.execute().then(function() {
                           window.alert('Payment Complete!');
-                          window.location = "http://localhost/waterbilling/paypal/receipt/" + billId;
+                          window.location = "http://localhost/waterbilling/paypal/receipt";
                       });
                   }
 
