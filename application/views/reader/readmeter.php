@@ -90,7 +90,7 @@
                             <label for="">Present Reading</label>
                             <div style="padding: 2px 10px" class="text-white bg-info">
                                 <?php 
-                                if($current_meter == ''){
+                                if($current_meter == '' or ($current_meter-$prev_meter)<0){
                                     ?> No current reading yet. <?php
                                 }else{
                                     echo sprintf("%04d", $current_meter); ?>
@@ -102,7 +102,7 @@
                             <label for="">Consupmtion</label>
                             <div style="padding: 2px 10px" class="text-white bg-info">
                                 <?php 
-                                if($current_meter == ''){
+                                if($current_meter == '' or ($current_meter-$prev_meter)<0){
                                     ?> No current reading yet. <?php
                                 }else{
                                     echo $current_meter-$prev_meter ; ?>
@@ -114,7 +114,7 @@
                             <label for="">Total Amount Due</label>
                             <div style="padding: 2px 10px" class="text-white bg-info">
                                 <?php 
-                                if($current_meter == ''){
+                                if($current_meter == '' or ($current_meter-$prev_meter)<0){
                                     ?> No current reading yet. <?php
                                 }else{
                                     echo '₱'.sprintf('%.2f', $bill); ?>

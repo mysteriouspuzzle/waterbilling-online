@@ -6,8 +6,8 @@ class Rates extends CI_Model {
 	public function getRates(){
 		return $this->db->get('rates')->result();
 	}
-	public function addRates($data){
-		return $this->db->insert('sales', $data);
+	public function storeRate($data){
+		return $this->db->insert('rates', $data);
 	}
 	public function getRateByDiff($diff){
 		return $this->db->get_where('rates', array('minimum <='=> $diff, 'maximum >=' => $diff))->row();

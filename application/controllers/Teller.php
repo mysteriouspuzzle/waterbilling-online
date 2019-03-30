@@ -6,6 +6,7 @@ class Teller extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('consumers');
+		$this->load->model('reading');
 		$this->load->view('layout/header');
 		if(!isset($_SESSION['wbUserID'])){
 			redirect('./');
@@ -22,6 +23,7 @@ class Teller extends CI_Controller {
 		$this->load->view('teller/addconsumer');
 	}
 	public function storeconsumer(){
+		$acct_number = $this->input->post('acct_number');
 		$firstname = $this->input->post('firstname');
 		$middlename = $this->input->post('middlename');
 		$lastname = $this->input->post('lastname');
@@ -30,6 +32,7 @@ class Teller extends CI_Controller {
 		$contact = $this->input->post('contact');
 		$email = $this->input->post('email');
 		$data = array(
+			'account_number'=>$acct_number
 			'firstname'=>ucwords($firstname),
 			'middlename'=>ucwords($middlename),
 			'lastname'=>ucwords($lastname),
@@ -38,7 +41,17 @@ class Teller extends CI_Controller {
 			'contactNumber'=>$contact,
 			'email'=>$email
 		);
-		$this->consumers->storeConsumer($data);
+		$consumer_id = $this->consumers->storeConsumer($data);
+		$data = array(
+			'consumer_id'=>$consumer_id,
+			'previous_read'=>'',
+			'next_read'=>'0000',
+			'rate'=>0,
+			'date'=>date('Y-m-d'),
+			'payment'=>0,
+			'status'=>0
+		);
+		$this->reading->saveTransaction($data);
 		$this->session->set_flashdata('success','Consumer succcessfully saved.');
 		redirect('teller/addconsumer');
 	}

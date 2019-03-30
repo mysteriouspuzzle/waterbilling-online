@@ -9,6 +9,7 @@ class Reader extends CI_Controller {
 		$this->load->model('reading');
 		$this->load->model('rates');
 		$this->load->model('smsapi');
+		$this->load->model('bills');
 		$this->load->view('layout/header');
 		if(!isset($_SESSION['wbUserID'])){
 			redirect('./');
@@ -28,40 +29,47 @@ class Reader extends CI_Controller {
 	public function readmeter($consumer_id){
 		$data['id'] = $consumer_id;
 		$data['current_meter'] = $this->input->post('current_meter');
-		$count_prev_meter = $this->reading->countPreviousMeterReading($consumer_id);
-		if($count_prev_meter == 1) {
+		$count_prev_meter = $this->bills->countPreviousMeterReading($consumer_id);
+		if($count_prev_meter == 0) {
 			$data['prev_meter'] = "0000";
 		}else{
-			$result = $this->reading->getPreviousMeterReading($consumer_id);
-			$data['prev_meter'] = $result->previous_read;
+			// $count = $this->bills->countPreviousMeterReading($consumer_id);
+			$result = $this->bills->getPreviousMeterReading($consumer_id);
+			$data['prev_meter'] = str_pad($result->present_meter, 4, '0', STR_PAD_LEFT);
 		}	
 		$data['consumer'] = $this->consumers->getConsumerDetails($consumer_id);
 		$diff = $data['current_meter'] - $data['prev_meter'];
-		$rate = $this->rates->getRateByDiff($diff);
-		if($rate->minimum ==0){	
-			$data['bill'] = $rate->rate;
-		}else{
-			$rates = $this->rates->getRates();
-			foreach($rates as $rate){
-				if($rate->minimum == 0){
-					$newDiff = $rate->rate;
-					$tmpMaxCubicMeter = $rate->maximum;
-				}elseif($rate->minimum != 0){
-					if($diff > $rate->maximum){
-						$newDiff = ($rate->rate * ($rate->maximum - $tmpMaxCubicMeter)) + $newDiff;
+		if($diff >= 0){
+			$rate = $this->rates->getRateByDiff($diff);
+			if($rate->minimum ==0){	
+				$data['bill'] = $rate->rate;
+			}else{
+				$rates = $this->rates->getRates();
+				foreach($rates as $rate){
+					if($rate->minimum == 0){
+						$newDiff = $rate->rate;
 						$tmpMaxCubicMeter = $rate->maximum;
-					}elseif($rate->minimum <= $diff and $rate->maximum >= $diff){
+					}elseif($rate->maximum == 0){
 						$newDiff = ($rate->rate * ($diff - $tmpMaxCubicMeter)) + $newDiff;
+					}elseif($rate->minimum != 0){
+						if($diff > $rate->maximum){
+							$newDiff = ($rate->rate * ($rate->maximum - $tmpMaxCubicMeter)) + $newDiff;
+							$tmpMaxCubicMeter = $rate->maximum;
+						}elseif($rate->minimum <= $diff and $rate->maximum >= $diff){
+							$newDiff = ($rate->rate * ($diff - $tmpMaxCubicMeter)) + $newDiff;
+						}
 					}
 				}
+				$data['bill'] = $newDiff;
 			}
-			$data['bill'] = $newDiff;
+		}else{
+			$this->session->set_flashdata('error','Invalid input.');
 		}
+		
 		$this->load->view('reader/readmeter', $data);
 	}
 	public function sendbill($id) {
 		$consumer = $this->consumers->getConsumerDetails($id);
-		$details = $this->reading->getPreviousMeterReading($id);
 		$bill = array(
 			'current_date'=>date('Y-m-d'),
 			'prev_meter'=>$this->input->post('prev_meter'),
@@ -77,9 +85,11 @@ class Reader extends CI_Controller {
 			'present_meter'=>$this->input->post('current_meter'),
 			'bill'=>$this->input->post('bill'),
 			'consumption'=>$this->input->post('consumption'),
+			'due_date'=>date('Y-m-d', strtotime(date('Y-m-d'). ' + 14 days')),
 			'status'=>'Unpaid'
 		);
-		$tId = $this->reading->saveTransaction($data);
+		$tId = $this->bills->saveTransaction($data);
+		$details = $this->bills->getBillDetails($tId);
 		$this->sendEmail($consumer, $details, $bill, $tId);
 		$this->sendSms($consumer, $details, $bill);
 		$this->session->set_flashdata('success','SMS and email successfully sent to consumer.');
@@ -106,11 +116,7 @@ class Reader extends CI_Controller {
 		$mail->isHTML(true);                                  // Set email format to HTML
 
 		$mail->Subject = 'Water Billing System Receipt';
-		$data['prev_date'] = $details->date;
-		$data['curr_date'] = $bill['current_date'];
-		$data['current_meter'] = $bill['current_meter'];
-		$data['prev_meter'] = $bill['prev_meter'];
-		$data['bill'] = $bill['bill'];
+		$data['details'] = $details;
 		$data['tid'] = $tId;
 		$msg = $this->load->view('reader/email',$data,true);
 		$mail->Body    = $msg;

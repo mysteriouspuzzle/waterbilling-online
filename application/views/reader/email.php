@@ -355,8 +355,8 @@ Sizes: [
 																		<table border="0" cellpadding="0" cellspacing="0" width="210" style="max-width: 100%;">
 																			<tr>
 																				<td align="left" class="textContent">
-                                          <div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">Period To: <?php echo $curr_date ?></div>
-																					<div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">Period From: <?php echo $prev_date ?></div>
+                                          <div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">Period To: <?php echo $details->present_date ?></div>
+																					<div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">Period From: <?php echo $details->previous_date ?></div>
 																				</td>
 																			</tr>
 																		</table>
@@ -365,8 +365,8 @@ Sizes: [
 																		<table class="flexibleContainerBoxNext" border="0" cellpadding="0" cellspacing="0" width="210" style="max-width: 100%;">
 																			<tr>
 																				<td align="left" class="textContent">
-                                          <div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">Present Reading: <?php echo $current_meter ?></div>
-																					<div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">Previous Reading:<?php echo $prev_meter ?></div>
+                                          <div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">Present Reading: <?php echo $details->present_meter ?></div>
+																					<div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">Previous Reading:<?php echo $details->previous_meter ?></div>
 																				</td>
 																			</tr>
 																		</table>

@@ -46,6 +46,10 @@
               </div>
               <div class="card-body card-block">
                 <div class="row form-group">
+                  <div class="col col-md-4"><label for="acct_number" class=" form-control-label">Account Number</label></div>
+                  <div class="col-12 col-md-8"><input type="number" id="acct_number" name="acct_number" placeholder="Account Number" class="form-control" required></div>
+                </div>
+                <div class="row form-group">
                   <div class="col col-md-4"><label for="firstname" class=" form-control-label">First Name</label></div>
                   <div class="col-12 col-md-8"><input type="text" id="firstname" name="firstname" placeholder="First Name" class="form-control text-capitalize" required></div>
                 </div>

@@ -71,7 +71,7 @@ class Administrator extends CI_Controller {
 		}
 
 
-		redirect('administrator/addaccount');
+		redirect('administrator/addrate');
 	}
 	function storeRateFunc($cubic_meter, $minimum, $maximum, $rate){
 		$data = array(
@@ -80,7 +80,7 @@ class Administrator extends CI_Controller {
 			'maximum'=>$maximum,
 			'rate'=>$rate
 		);
-		$this->rate->storeRate($data);
+		$this->rates->storeRate($data);
 	}
 	public function updateaccount(){
 		$id = $this->input->post('id');

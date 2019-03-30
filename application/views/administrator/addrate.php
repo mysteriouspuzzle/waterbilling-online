@@ -65,7 +65,7 @@
                 </div>
                 <div class="row form-group">
                   <div class="col col-md-3"><label for="rate" class="form-control-label">Rate</label></div>
-                  <div class="col-12 col-md-9"><input type="number" id="rate" name="rate" placeholder="Rate" class="form-control" required></div>
+                  <div class="col-12 col-md-9"><input type="text" id="rate" name="rate" placeholder="Rate" class="form-control" required></div>
                   <!-- <div class="help-block">Minimum of 6 characters</div> -->
                 </div>
               </div>

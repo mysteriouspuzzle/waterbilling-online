@@ -9,7 +9,8 @@ class Consumers extends CI_Model {
 
   public function storeConsumer($data){
 		$this->db->insert('consumers', $data);
-		return null;
+		$insertId = $this->db->insert_id();
+		return $insertId;
 	}
 
 	public function getConsumerDetails($id){
