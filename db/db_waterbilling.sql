@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.8.3
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2019 at 12:58 AM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 7.0.9
+-- Generation Time: Mar 30, 2019 at 01:44 AM
+-- Server version: 10.1.36-MariaDB
+-- PHP Version: 5.6.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -35,6 +37,7 @@ CREATE TABLE `bills` (
   `present_meter` varchar(10) NOT NULL,
   `consumption` int(5) NOT NULL,
   `bill` float(10,2) NOT NULL,
+  `due_date` date NOT NULL,
   `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -42,11 +45,12 @@ CREATE TABLE `bills` (
 -- Dumping data for table `bills`
 --
 
-INSERT INTO `bills` (`bill_id`, `consumer_id`, `previous_date`, `present_date`, `previous_meter`, `present_meter`, `consumption`, `bill`, `status`) VALUES
-(1, 1, '2019-03-28', '2019-03-28', '0', '11', 11, 38.85, 'Unpaid'),
-(2, 1, '2019-03-28', '2019-03-28', '0000', '12', 12, 42.70, 'Unpaid'),
-(3, 1, '2019-03-28', '2019-03-28', '0000', '10', 10, 35.00, 'Unpaid'),
-(4, 1, '2019-03-28', '2019-03-28', '0000', '30', 30, 116.00, 'Unpaid');
+INSERT INTO `bills` (`bill_id`, `consumer_id`, `previous_date`, `present_date`, `previous_meter`, `present_meter`, `consumption`, `bill`, `due_date`, `status`) VALUES
+(1, 1, '2019-03-28', '2019-03-28', '0', '11', 11, 38.85, '0000-00-00', 'Unpaid'),
+(2, 1, '2019-03-28', '2019-03-28', '0000', '12', 12, 42.70, '0000-00-00', 'Unpaid'),
+(3, 1, '2019-03-28', '2019-03-28', '0000', '10', 10, 35.00, '0000-00-00', 'Unpaid'),
+(4, 1, '2019-03-28', '2019-03-28', '0000', '30', 30, 116.00, '0000-00-00', 'Unpaid'),
+(5, 3, '2019-03-30', '2019-03-30', '0000', '12', 12, 42.70, '0000-00-00', 'Unpaid');
 
 -- --------------------------------------------------------
 
@@ -80,6 +84,7 @@ INSERT INTO `codes` (`id`, `pass_id`, `code`, `status`) VALUES
 
 CREATE TABLE `consumers` (
   `id` int(255) NOT NULL,
+  `account_number` int(15) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `middlename` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
@@ -94,9 +99,11 @@ CREATE TABLE `consumers` (
 -- Dumping data for table `consumers`
 --
 
-INSERT INTO `consumers` (`id`, `firstname`, `middlename`, `lastname`, `birthdate`, `address`, `contactNumber`, `email`, `online`) VALUES
-(1, 'Makisig', '', 'Gerero', '2009-03-04', 'Lacion City', '09342324255', 'mysterious.puzzle15@gmail.com', 0),
-(2, 'Jake Joseph', 'Malinao', 'Lingatong', '2018-10-22', 'Bogo', '09328478343', 'mysterious.puzzle15@gmail.com', 0);
+INSERT INTO `consumers` (`id`, `account_number`, `firstname`, `middlename`, `lastname`, `birthdate`, `address`, `contactNumber`, `email`, `online`) VALUES
+(1, 190001, 'Makisig', '', 'Gerero', '2009-03-04', 'Lacion City', '09342324255', 'mysterious.puzzle15@gmail.com', 0),
+(2, 190002, 'Jake Joseph', 'Malinao', 'Lingatong', '2018-10-22', 'Bogo', '09328478343', 'mysterious.puzzle15@gmail.com', 0),
+(3, 190003, 'Apple', 'Orange', 'Lala', '2019-03-18', 'Sitio Pikas', '09097895572', 'lahlaineybanez10@gmail.com', 0),
+(4, 190004, 'Mike', 'Excusemepo', 'Enriquez', '2017-08-15', 'Tambulilid, Ormoc City', '0945521986', 'iamstevenjamesb@gmail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -144,7 +151,10 @@ CREATE TABLE `rates` (
 INSERT INTO `rates` (`id`, `cubic_meter`, `minimum`, `maximum`, `rate`) VALUES
 (1, 'Minimum-10 cu. m.', 0, 10, 35),
 (2, '11-20 cu. m.', 11, 20, 3.85),
-(3, '21-30 cu. m.', 21, 30, 4.25);
+(3, '21-30 cu. m.', 21, 30, 4.25),
+(4, '31-40 cu.m.', 31, 40, 4.65),
+(5, '41-50 cu.m.', 41, 50, 5.1),
+(6, 'Over 50 cu.m.', 50, 9999, 5.65);
 
 -- --------------------------------------------------------
 
@@ -169,7 +179,9 @@ CREATE TABLE `reading` (
 
 INSERT INTO `reading` (`id`, `consumer_id`, `previous_read`, `next_read`, `rate`, `date`, `payment`, `status`) VALUES
 (1, 2, '', '0000', 0, '2019-03-01', 0, 0),
-(2, 1, '', '0000', 0, '2019-03-01', 0, 0);
+(2, 1, '', '0000', 0, '2019-03-01', 0, 0),
+(3, 3, '', '0000', 0, '2019-03-30', 0, 0),
+(4, 4, '', '0000', 0, '2019-03-30', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -187,7 +199,7 @@ CREATE TABLE `sms_api` (
 --
 
 INSERT INTO `sms_api` (`id`, `endpoint`) VALUES
-(1, 'http://192.168.1.6:8080/');
+(1, 'http://192.168.254.103:8080/');
 
 -- --------------------------------------------------------
 
@@ -271,42 +283,51 @@ ALTER TABLE `user_levels`
 -- AUTO_INCREMENT for table `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `bill_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `bill_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT for table `codes`
 --
 ALTER TABLE `codes`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `consumers`
 --
 ALTER TABLE `consumers`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `credentials`
 --
 ALTER TABLE `credentials`
   MODIFY `id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `rates`
 --
 ALTER TABLE `rates`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `reading`
 --
 ALTER TABLE `reading`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `sms_api`
 --
 ALTER TABLE `sms_api`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `user_levels`
 --
 ALTER TABLE `user_levels`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
