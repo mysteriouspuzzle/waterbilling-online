@@ -38,6 +38,12 @@
                <span class="ti ti-check"></span> <?php echo $this->session->flashdata('success'); ?>
            </div>
           <?php } ?>
+          <?php if($this->session->flashdata('error')){ ?>
+            <div class="alert alert-danger">
+               <a href="#" class="close" data-dismiss="alert">&times;</a>
+               <span class="ti ti-check"></span> <?php echo $this->session->flashdata('error'); ?>
+           </div>
+          <?php } ?>
         </div>
         <div class="col-lg-3 col-sm-12">
             <div class="card">

@@ -405,7 +405,12 @@ Sizes: [
 																		<table border="0" cellpadding="0" cellspacing="0" width="210" style="max-width: 100%;">
 																			<tr>
 																				<td align="left" class="textContent">
-                                                                                    <h3><div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">TOTAL AMOUNT DUE: <?php echo $bill ?></div></h3>
+                                                                                    <h3><div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">DUE DATE: <?php echo $details->due_date ?></div></h3>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td align="left" class="textContent">
+                                                                                    <h3><div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">TOTAL AMOUNT DUE: <?php echo $details->bill ?></div></h3>
 																				</td>
 																			</tr>
 																		</table>

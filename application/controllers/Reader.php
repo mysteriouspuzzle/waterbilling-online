@@ -49,8 +49,6 @@ class Reader extends CI_Controller {
 					if($rate->minimum == 0){
 						$newDiff = $rate->rate;
 						$tmpMaxCubicMeter = $rate->maximum;
-					}elseif($rate->maximum == 0){
-						$newDiff = ($rate->rate * ($diff - $tmpMaxCubicMeter)) + $newDiff;
 					}elseif($rate->minimum != 0){
 						if($diff > $rate->maximum){
 							$newDiff = ($rate->rate * ($rate->maximum - $tmpMaxCubicMeter)) + $newDiff;
@@ -62,8 +60,11 @@ class Reader extends CI_Controller {
 				}
 				$data['bill'] = $newDiff;
 			}
+			unset($_SESSION['error']);
 		}else{
-			$this->session->set_flashdata('error','Invalid input.');
+			if($data['current_meter']!==null){
+				$this->session->set_flashdata('error','Invalid input.');
+			}
 		}
 		
 		$this->load->view('reader/readmeter', $data);
