@@ -17,6 +17,13 @@
                     <li><a href="administrator/accounts">View Accounts</a></li>
                 </ul>
             </li>
+            <li class="menu-item-has-children dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Consumers</a>
+                <ul class="sub-menu children dropdown-menu">
+                  <li><a href="teller/addconsumer">Add Consumer</a></li>
+                    <li><a href="teller/viewconsumers">View Consumers</a></li>
+                </ul>
+            </li>
             <li class="menu-item-has-children dropdown active">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tint"></i>Rates</a>
                 <ul class="sub-menu children dropdown-menu">

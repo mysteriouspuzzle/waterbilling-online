@@ -18,6 +18,9 @@
                 </ul>
             </li>
             <li class="menu-item-has-children dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Consumers</a>
+            </li>
+            <li class="menu-item-has-children dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tint"></i>Rates</a>
                 <ul class="sub-menu children dropdown-menu">
                     <li><a href="administrator/addrate">New Rate</a></li>

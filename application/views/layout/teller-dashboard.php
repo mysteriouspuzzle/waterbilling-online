@@ -10,12 +10,8 @@
             <li class="active">
                 <a href="teller/"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
             </li>
-            <li class="menu-item-has-children dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Consumers</a>
-                <ul class="sub-menu children dropdown-menu">
-                  <li><a href="teller/addconsumer">Add Consumer</a></li>
-                    <li><a href="teller/viewconsumers">View Consumers</a></li>
-                </ul>
+            <li>
+                <a href="teller/viewconsumers"> <i class="menu-icon fa fa-user"></i>Consumers</a>
             </li>
         </ul>
     </div><!-- /.navbar-collapse -->

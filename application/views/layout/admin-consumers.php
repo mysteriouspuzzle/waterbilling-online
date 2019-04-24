@@ -17,7 +17,7 @@
                     <li><a href="administrator/accounts">View Accounts</a></li>
                 </ul>
             </li>
-            <li class="menu-item-has-children dropdown">
+            <li class="menu-item-has-children dropdown active">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Consumers</a>
                 <ul class="sub-menu children dropdown-menu">
                   <li><a href="teller/addconsumer">Add Consumer</a></li>
@@ -34,7 +34,7 @@
             <li class="">
                 <a href="administrator/sales"> <i class="menu-icon ti ti-money"></i>Sales </a>
             </li>
-            <li class="menu-item-has-children dropdown active">
+            <li class="menu-item-has-children dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-envelope"></i>SMS</a>
                 <ul class="sub-menu children dropdown-menu">
                     <li><a href="administrator/smsapi">SMS API</a></li>

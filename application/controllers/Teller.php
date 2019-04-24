@@ -32,7 +32,7 @@ class Teller extends CI_Controller {
 		$contact = $this->input->post('contact');
 		$email = $this->input->post('email');
 		$data = array(
-			'account_number'=>$acct_number
+			'account_number'=>$acct_number,
 			'firstname'=>ucwords($firstname),
 			'middlename'=>ucwords($middlename),
 			'lastname'=>ucwords($lastname),
