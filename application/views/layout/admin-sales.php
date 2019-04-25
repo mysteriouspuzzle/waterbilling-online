@@ -19,6 +19,10 @@
             </li>
             <li class="menu-item-has-children dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Consumers</a>
+                <ul class="sub-menu children dropdown-menu">
+                  <li><a href="administrator/addconsumer">Add Consumer</a></li>
+                    <li><a href="administrator/viewconsumers">View Consumers</a></li>
+                </ul>
             </li>
             <li class="menu-item-has-children dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tint"></i>Rates</a>

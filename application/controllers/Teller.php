@@ -19,44 +19,4 @@ class Teller extends CI_Controller {
 		session_destroy();
 		redirect('./');
 	}
-	public function addconsumer(){
-		$this->load->view('teller/addconsumer');
-	}
-	public function storeconsumer(){
-		$acct_number = $this->input->post('acct_number');
-		$firstname = $this->input->post('firstname');
-		$middlename = $this->input->post('middlename');
-		$lastname = $this->input->post('lastname');
-		$birthdate = $this->input->post('birthdate');
-		$address = $this->input->post('address');
-		$contact = $this->input->post('contact');
-		$email = $this->input->post('email');
-		$data = array(
-			'account_number'=>$acct_number,
-			'firstname'=>ucwords($firstname),
-			'middlename'=>ucwords($middlename),
-			'lastname'=>ucwords($lastname),
-			'birthdate'=>date('Y-m-d', strtotime($birthdate)),
-			'address'=>ucwords($address),
-			'contactNumber'=>$contact,
-			'email'=>$email
-		);
-		$consumer_id = $this->consumers->storeConsumer($data);
-		$data = array(
-			'consumer_id'=>$consumer_id,
-			'previous_read'=>'',
-			'next_read'=>'0000',
-			'rate'=>0,
-			'date'=>date('Y-m-d'),
-			'payment'=>0,
-			'status'=>0
-		);
-		$this->reading->saveTransaction($data);
-		$this->session->set_flashdata('success','Consumer succcessfully saved.');
-		redirect('teller/addconsumer');
-	}
-	public function viewconsumers(){
-		$data['consumers'] = $this->consumers->getAllConsumers();
-		$this->load->view('teller/viewconsumers', $data);
-	}
 }
