@@ -13,6 +13,10 @@ class Consumers extends CI_Model {
 		return $insertId;
 	}
 
+	public function checkConsumerCredential($email, $pass){
+    return $this->db->get_where('consumers', array('email'=>$email, 'password'=>$pass))->row();
+  }
+
 	public function getConsumerDetails($id){
 		return $this->db->get_where('consumers', array('id'=>$id))->row();
 	}

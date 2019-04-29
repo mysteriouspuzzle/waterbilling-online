@@ -5,13 +5,15 @@ class Consumer extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
+		$this->load->model('bills');
 		$this->load->view('layout/header');
-		if(!isset($_SESSION['wbUserID'])){
+		if(!isset($_SESSION['wboUserID'])){
 			redirect('./');
 		}
 	}
 	public function index(){
-		$this->load->view('reader/dashboard');
+		$data['records'] = $this->bills->getConsumerBills($_SESSION['wboUserID']);
+		$this->load->view('consumer/dashboard', $data);
 	}
 	public function logout(){
 		session_destroy();

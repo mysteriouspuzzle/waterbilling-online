@@ -61,7 +61,8 @@
                        <?php echo $this->session->flashdata('success'); ?>
                    </div>
                   <?php } ?>
-                <form method="get" action="login/createnewpass">
+                <form method="post" action="login/createnewpass">
+                    <input type="hidden" name="id" value="<?php echo $id ?>">
                     <div class="form-group">
                         <label>Password</label>
                         <input type="password" name="pass" class="form-control" placeholder="Create password" required autofocus>

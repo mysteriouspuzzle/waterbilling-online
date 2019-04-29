@@ -68,6 +68,11 @@
                     <div class="form-group">
                       <input type="password" class="form-control" name="password" placeholder="Password">
                     </div>
+                    <?php if($this->session->flashdata('error')){ ?>
+                    <div class="text text-danger">
+                        <?php echo $this->session->flashdata('error'); ?>
+                    </div>
+                    <?php } ?>
                     <div class="form-group">
                       <input type="submit" class="btn btn-primary btn-pill" value="Sign In">
                     </div>

@@ -24,4 +24,8 @@ class Bills extends CI_Model {
   public function getPreviousMeterReading($consumer_id){
     return $this->db->order_by('bill_id', 'desc')->get_where('bills', array('consumer_id'=>$consumer_id))->row();
   }
+
+  public function getConsumerBills($consumer_id){
+    return $this->db->order_by('bill_id', 'desc')->get_where('bills', array('consumer_id'=>$consumer_id))->result();
+  }
 }

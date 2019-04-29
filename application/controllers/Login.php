@@ -10,10 +10,8 @@ class Login extends CI_Controller {
 		$this->load->model('codes');
 		$this->load->model('online_verification');
 		$this->load->view('layout/header');
-		if(isset($_SESSION['wbUserID'])){
-			if($_SESSION['wbUserLevel']=='Consumer'){
-				redirect('consumer/');
-			}
+		if(isset($_SESSION['wboUserID'])){
+			redirect('consumer/');
 		}
 	}
 	
@@ -22,23 +20,18 @@ class Login extends CI_Controller {
 	}
 
 	public function login(){
-		$u = $this->input->post('email');
-		$p = $this->input->post('password');
-		$p = md5($p);
-		$user = $this->credentials->checkUserCredential($u, $p);
+		$email = $this->input->post('email');
+		$pass = $this->input->post('password');
+		$pass = md5($pass);
+		$user = $this->consumers->checkConsumerCredential($email, $pass);
 		$count = count($user);
 		if($count==0){
 			$this->session->set_flashdata('error','Invalid Credentials.');
 			redirect('./');
 		}else{
-			$_SESSION['wbUserID'] =$user->id;
-			$_SESSION['wbUserLevel'] =$user->userLevel;
-			$_SESSION['wbUser'] =$user->fullname;
-			if($_SESSION['wbUserLevel']=='Teller'){
-				redirect('teller/');
-			}elseif($_SESSION['wbUserLevel']=='Reader'){
-				redirect('reader/');
-			}
+			$_SESSION['wboUserID'] = $user->id;
+			$_SESSION['wboUser'] = $user->lastname . ', ' . $user->firstname;
+			redirect('consumer/');
 		}
 	}
 
@@ -118,19 +111,19 @@ class Login extends CI_Controller {
 		}
 	}
 
-	public function newpass(){
-		$this->load->view('newpass');
+	public function newpass($id){
+		$data['id'] = $id;
+		$this->load->view('newpass',$data);
 	}
 
 	public function createnewpass(){
-		$pass = $this->input->get('pass');
-		$cpass = $this->input->get('cpass');
+		$id = $this->input->post('id');
+		$pass = $this->input->post('pass');
+		$cpass = $this->input->post('cpass');
 		if($pass == $cpass){
 			$pass = md5($pass);
-			$id = $_SESSION['fp'];
-			$this->db->query("update credentials set password = '$pass' where id = '$id'");
-			unset($_SESSION['fp']); 
-			redirect('login');
+			$this->db->query("update consumers set password = '$pass' where id = '$id'");
+			redirect('./');
 		}else{
 			$this->session->set_flashdata('error', 'Password does not match.');
 			redirect('login/newpass');
@@ -205,7 +198,7 @@ class Login extends CI_Controller {
 			);
 			$this->consumers->updateConsumer($consumer->consumer_id, $data);
 			$this->session->set_flashdata('success', 'Email verified. Create password');
-			redirect('login/newpass');
+			redirect('login/newpass/'.$consumer->consumer_id);
 		}else{
 			$this->session->set_flashdata('error1', 'Invalid or expired verification code.');
 			redirect('login/enroll');
