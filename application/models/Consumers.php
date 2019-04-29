@@ -16,4 +16,17 @@ class Consumers extends CI_Model {
 	public function getConsumerDetails($id){
 		return $this->db->get_where('consumers', array('id'=>$id))->row();
 	}
+
+	public function checkAccount($accountno, $email){
+		return $this->db->get_where('consumers', array('account_number'=>$accountno, 'email'=>$email, 'online'=>0))->num_rows();
+	}
+
+	public function getConsumerDetailsByAccountNo($accountno){
+		return $this->db->get_where('consumers', array('account_number'=>$accountno))->row();
+	}
+
+	public function updateConsumer($id, $data){
+		$this->db->where('id', $id)->update('consumers', $data);
+		return null;
+	}
 }

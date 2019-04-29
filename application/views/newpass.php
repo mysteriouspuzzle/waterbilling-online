@@ -1,56 +1,79 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<body class="bg-dark">
+<?php $this->load->view('layout/header'); ?>
+  <!-- <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300"> -->
+  <style>
+    .main-menu li {
+      display: inline-block !important;
+      margin: 15px 0;
+    }
+  </style>
+  <div class="site-wrap">
+
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+      
+      <div class="container-fluid">
+        <div class="d-flex align-items-center">
+          <div class="site-logo mr-auto w-25"><a href="index.html" style="color:black">Water Billing System</a></div>
+
+          <div class="mx-auto text-center">
+            <nav class="site-navigation position-relative text-right" role="navigation">
+              <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
+                <li><a href="#home-section" class="nav-link">Home</a></li>
+                <li><a href="#about-us-section" class="nav-link">About Us</a></li>
+                <!-- <li><a href="#programs-section" class="nav-link">Programs</a></li>
+                <li><a href="#teachers-section" class="nav-link">Teachers</a></li> -->
+              </ul>
+            </nav>
+          </div>
+
+          <div class="ml-auto w-25">
+            <nav class="site-navigation position-relative text-right" role="navigation">
+              <ul class="site-menu main-menu site-menu-dark js-clone-nav mr-auto d-none d-lg-block m-0 p-0">
+                <li class="cta"><a href="#contact-section" class="nav-link"><span>Contact Us</span></a></li>
+              </ul>
+            </nav>
+            <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right"><span class="icon-menu h3"></span></a>
+          </div>
+        </div>
+      </div>
+
+    <div class="site-section bg-light" id="contact-section">
+      <div class="container">
+
+        <div class="row justify-content-center">
+          <div class="col-md-7">
 
 
-    <div class="sufee-login d-flex align-content-center flex-wrap">
-        <div class="container">
-            <div class="login-content">
-                <div class="login-logo">
-                    <a href="index.html">
-
-                    </a>
-                </div>
-                <div class="login-form">
-                  <div align="center">
+            
+            <div align="center">
                     <h4>New Password</h4>
                   </div>
-                  <?php if($this->session->flashdata('error')){ ?>
-                    <div class="alert alert-danger">
+                  <?php if($this->session->flashdata('success')){ ?>
+                    <div class="alert alert-success">
                        <a href="#" class="close" data-dismiss="alert">&times;</a>
-                       <strong>Sorry!</strong> <?php echo $this->session->flashdata('error'); ?>
+                       <?php echo $this->session->flashdata('success'); ?>
                    </div>
                   <?php } ?>
-                    <form method="get" action="login/createnewpass">
-                        <div class="form-group">
-                            <label>New Password</label>
-                            <input type="password" name="pass" class="form-control" placeholder="Enter your new password" required autofocus>
-                        </div>
-                        <div class="form-group">
-                            <label>Confirm Password</label>
-                            <input type="password" name="cpass" class="form-control" placeholder="Confirm new password" required autofocus>
-                        </div>
-                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Recover</button>
-                        <!-- <div class="social-login-content">
-                            <div class="social-button">
-                                <button type="button" class="btn social facebook btn-flat btn-addon mb-3"><i class="ti-facebook"></i>Sign in with facebook</button>
-                                <button type="button" class="btn social twitter btn-flat btn-addon mt-2"><i class="ti-twitter"></i>Sign in with twitter</button>
-                            </div>
-                        </div>
-                        <div class="register-link m-t-15 text-center">
-                            <p>Don't have account ? <a href="#"> Sign Up Here</a></p>
-                        </div> -->
-                    </form>
-                </div>
-            </div>
+                <form method="get" action="login/createnewpass">
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="pass" class="form-control" placeholder="Create password" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" name="cpass" class="form-control" placeholder="Confirm password" required autofocus>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Confirm</button>
+                </form>
+          </div>
         </div>
+      </div>
     </div>
-
-
-    <script src="assets/js/vendor/jquery-2.1.4.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/main.js"></script>
-
-
-</body>
-</html>
+    <?php $this->load->view('layout/footer'); ?>
