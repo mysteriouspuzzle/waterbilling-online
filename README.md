@@ -7,3 +7,4 @@ Installation
 4. Go to localhost/waterbilling/admin for admin
 5. Go to localhost/waterbilling for users
 "# waterbilling-online" 
+"# waterbilling-online" 
