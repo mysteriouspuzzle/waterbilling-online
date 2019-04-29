@@ -6,3 +6,4 @@ Installation
 3. Get database on waterbilling/db and import to your db
 4. Go to localhost/waterbilling/admin for admin
 5. Go to localhost/waterbilling for users
+"# waterbilling-online" 
