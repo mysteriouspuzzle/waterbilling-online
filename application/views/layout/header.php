@@ -26,5 +26,10 @@
     <link rel="stylesheet" href="assets/css/style.css">
 
     <?php date_default_timezone_set('Asia/Manila'); ?>
+    <style>
+      body {
+        font-size-adjust: 0.5;
+      }
+    </style>
     
   </head>

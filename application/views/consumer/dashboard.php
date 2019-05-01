@@ -67,13 +67,17 @@
               <?php foreach($records as $record){ ?>
                 <tr>
                   <td><?php echo $record->previous_date ?></td>
-                  <td><?php echo $record->previous_date ?></td>
-                  <td><?php echo $record->previous_date ?></td>
-                  <td><?php echo $record->previous_date ?></td>
-                  <td><?php echo $record->previous_date ?></td>
-                  <td><?php echo $record->previous_date ?></td>
-                  <td><?php echo $record->previous_date ?></td>
-                  <td><a href="" class="btn btn-primary">Button</a></td>
+                  <td><?php echo $record->present_date ?></td>
+                  <td><?php echo $record->previous_meter ?></td>
+                  <td><?php echo $record->present_meter ?></td>
+                  <td><?php echo $record->consumption ?></td>
+                  <td><?php echo '₱'.$record->bill ?></td>
+                  <td><?php echo $record->due_date ?></td>
+                  <?php if($record->status == 'Unpaid'){ ?>
+                    <td><a href="consumer/paymentdetails/<?php echo $record->bill_id ?>" class="btn btn-info">Pay</a></td>
+                  <?php }else{ ?>
+                    <td>Paid</td>
+                  <?php } ?>
                 </tr>
               <?php } ?>
               </tbody>
