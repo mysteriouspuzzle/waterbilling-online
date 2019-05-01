@@ -14,6 +14,7 @@ class Consumer extends CI_Controller {
 	}
 	public function index(){
 		$data['records'] = $this->bills->getConsumerBills($_SESSION['wboUserID']);
+		$data['consumer'] = $this->consumers->getConsumerDetails($_SESSION['wboUserID']);
 		$this->load->view('consumer/dashboard', $data);
 	}
 	public function logout(){

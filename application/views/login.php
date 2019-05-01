@@ -18,11 +18,12 @@
       
       <div class="container-fluid">
         <div class="d-flex align-items-center">
-          <div class="site-logo mr-auto w-25"><a href="index.html">Water Billing System</a></div>
+          <div class="site-logo mr-auto w-25 d-none d-md-block d-lg-block"><a href="login/login" style="color:black">Water Billing System</a></div>
+          <div class="site-logo mr-auto w-25 d-md-none d-sm-block d-xs-block"><a href="login/login" style="color:black">WBS</a></div>
 
           <div class="mx-auto text-center">
             <nav class="site-navigation position-relative text-right" role="navigation">
-              <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
+              <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-block  m-0 p-0">
                 <li><a href="#home-section" class="nav-link">Home</a></li>
                 <li><a href="#about-us-section" class="nav-link">About Us</a></li>
                 <!-- <li><a href="#programs-section" class="nav-link">Programs</a></li>
@@ -33,7 +34,7 @@
 
           <div class="ml-auto w-25">
             <nav class="site-navigation position-relative text-right" role="navigation">
-              <ul class="site-menu main-menu site-menu-dark js-clone-nav mr-auto d-none d-lg-block m-0 p-0">
+              <ul class="site-menu main-menu site-menu-dark js-clone-nav mr-auto d-block m-0 p-0">
                 <li class="cta"><a href="#contact-section" class="nav-link"><span>Contact Us</span></a></li>
               </ul>
             </nav>

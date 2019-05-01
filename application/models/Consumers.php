@@ -14,7 +14,7 @@ class Consumers extends CI_Model {
 	}
 
 	public function checkConsumerCredential($email, $pass){
-    return $this->db->get_where('consumers', array('email'=>$email, 'password'=>$pass))->row();
+    return $this->db->get_where('consumers', array('email'=>$email, 'password'=>$pass, 'online'=>1))->row();
   }
 
 	public function getConsumerDetails($id){

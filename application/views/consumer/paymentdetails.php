@@ -22,13 +22,13 @@
         <div class="d-flex align-items-center">
           <div class="site-logo mr-auto w-25"><a href="login/login" style="color:black">Water Billing System</a></div>
 
-          <div class="mx-auto text-center">
+          <!-- <div class="mx-auto text-center">
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu main-menu js-clone-nav mx-auto d-none d-lg-block  m-0 p-0">
                 <li><a href="consumer/account" class="nav-link">Account</a></li>
               </ul>
             </nav>
-          </div>
+          </div> -->
 
           <div class="ml-auto w-25">
             <nav class="site-navigation position-relative text-right" role="navigation">
