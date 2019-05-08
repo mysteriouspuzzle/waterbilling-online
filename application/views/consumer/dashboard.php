@@ -50,10 +50,10 @@
 
             <div class="row">
               <div class="col-md-6">
-                <h5>Account No.:</h5> <?php echo $consumer->lastname. ', ' . $consumer->firstname ?>
+                <h5>Account No.: </h5><?php echo $consumer->account_number ?>
               </div>
               <div class="col-md-6">
-                <h5>Name:</h5> <?php echo $consumer->account_number ?>
+                <h5>Name: </h5><?php echo $consumer->lastname. ', ' . $consumer->firstname ?>
               </div>
             </div><hr>
 

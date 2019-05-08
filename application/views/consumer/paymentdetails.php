@@ -51,10 +51,10 @@
 
             <div class="row">
               <div class="col-md-6">
-                <h5>Account No.:</h5> <span class="p-1 bg-info text-white"><?php echo $consumer->lastname. ', ' . $consumer->firstname ?></span>
+                <h5>Account No.: </h5><span class="p-1 bg-info text-white"><?php echo $consumer->account_number ?></span>
               </div>
               <div class="col-md-6">
-                <h5>Name:</h5> <span class="p-1 bg-info text-white"><?php echo $consumer->account_number ?></span>
+                <h5>Name: </h5><span class="p-1 bg-info text-white"><?php echo $consumer->lastname. ', ' . $consumer->firstname ?></span>
               </div>
             </div><hr>
             <div class="row">
