@@ -144,7 +144,7 @@
                       // Make a call to the REST api to execute the payment
                       return actions.payment.execute().then(function() {
                           window.alert('Payment Complete! e-receipt sent on your email.');
-                          window.location = "http://localhost/waterbilling-online/consumer";
+                          window.location = "http://localhost/waterbilling-online/paypal/receipt/" + billId;
                       });
                   }
 

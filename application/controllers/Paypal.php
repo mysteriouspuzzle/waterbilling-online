@@ -31,7 +31,7 @@ class Paypal extends CI_Controller {
 		$billDetails = $this->bills->getBillDetails($id);
 		$consumer = $this->consumers->getConsumerDetails($billDetails->consumer_id);
 		$this->sendEmail($consumer, $billDetails);
-		$this->load->view('paypal/receipt');
+		redirect('consumer');
 	}
 	function sendEmail($consumer, $billDetails){
 		$this->load->view('PHPMailerAutoload');

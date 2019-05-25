@@ -5,7 +5,8 @@ class Bills extends CI_Model {
 
   public function paidBill($bill_id){
     $data = array(
-      'status' => 'Paid'
+      'status' => 'Paid',
+      'payment_type' => 'online'
     );
     $this->db->where('bill_id', $bill_id)->update('bills', $data);
     return null;
