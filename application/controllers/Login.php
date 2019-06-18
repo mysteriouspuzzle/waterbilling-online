@@ -178,7 +178,8 @@ class Login extends CI_Controller {
 		$mail->isHTML(true);                                  // Set email format to HTML
 		$fullName = $user->firstname. ' '. $user->lastname;
 		$mail->Subject = 'Email verification';
-		$mail->Body    = "Hi $fullName, <br> Click <a href='localhost/waterbilling-online/login/verifyemail/$code'>here</a> to verify your email address.";
+		$server = $_SERVER['SERVER_ADDR'];
+		$mail->Body    = "Hi $fullName, <br> Click <a href='$server/waterbilling-online/login/verifyemail/$code'>here</a> to verify your email address.";
 		$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
 		if(!$mail->send()) {
