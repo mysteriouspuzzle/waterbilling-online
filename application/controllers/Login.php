@@ -104,7 +104,7 @@ class Login extends CI_Controller {
 		$id = $_SESSION['fp'];
 		$check = $this->db->query("select * from codes where code = '$code' and pass_id = '$id' and status = 'Pending'")->num_rows();
 		if($check == 1){
-			redirect('login/newpass');
+			redirect('login/newpass/'.$id);
 		}else{
 			$this->session->set_flashdata('error', 'Invalid code.');
 			redirect('login/code');
@@ -114,6 +114,10 @@ class Login extends CI_Controller {
 	public function newpass($id){
 		$data['id'] = $id;
 		$this->load->view('newpass',$data);
+	}
+
+	public function newpass2(){
+		$this->load->view('newpass');
 	}
 
 	public function createnewpass(){

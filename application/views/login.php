@@ -77,6 +77,7 @@
                     <div class="form-group">
                       <input type="submit" class="btn btn-primary btn-pill" value="Sign In">
                     </div>
+                    <a href="login/email">forgot password</a> 
                   </form>
 
                 </div>
