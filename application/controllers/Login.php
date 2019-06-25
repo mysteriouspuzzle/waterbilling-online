@@ -183,7 +183,10 @@ class Login extends CI_Controller {
 		$fullName = $user->firstname. ' '. $user->lastname;
 		$mail->Subject = 'Email verification';
 		$server = $_SERVER['SERVER_ADDR'];
-		$mail->Body    = "Hi $fullName, <br> Click <a href='$server/waterbilling-online/login/verifyemail/$code'>here</a> to verify your email address.";
+		if($server == '::1'){
+			$server = 'localhost';
+		}
+		$mail->Body    = "Hi $fullName, <br> Click <a href='http://$server/waterbilling-online/login/verifyemail/$code'>here</a> to verify your email address.";
 		$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
 		if(!$mail->send()) {
