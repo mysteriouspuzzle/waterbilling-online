@@ -34,6 +34,7 @@
           <div class="ml-auto w-25">
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu main-menu site-menu-dark js-clone-nav mr-auto d-block m-0 p-0">
+                <li class=""><a target="_blank" href="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=/waterbilling/reader/readmeter/<?php echo $_SESSION['wboUserID'] ?>&choe=UTF-8" class=""><i class="fas fa-qrcode"></i></a></li>
                 <li class="cta"><a href="user/logout" class="nav-link"><span>Logout</span></a></li>
               </ul>
             </nav>

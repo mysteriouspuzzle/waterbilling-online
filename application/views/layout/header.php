@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="assets/css/aos.css">
 
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
     <?php date_default_timezone_set('Asia/Manila'); ?>
     <style>
